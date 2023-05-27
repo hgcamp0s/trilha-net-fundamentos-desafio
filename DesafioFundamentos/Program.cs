@@ -9,6 +9,9 @@ decimal precoPorHora = 0;
 bool precoInicialValido = false;
 bool precoPorHoraValido = false;
 
+// Obs: Inicialmente caso o usuário digitasse uma letra e não um número, o programa dava erro e encerrava,
+// com essa solução aplicada a baixo e na classe RemoverVeiculo o programa roda até que seja digitado um número válido
+
 Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
                  "Digite o preço inicial:");
 while (!precoInicialValido) // Loop pra verificar se o que o usuário digitou pode ser convertido em um número decimal válido
