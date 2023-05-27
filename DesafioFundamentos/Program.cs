@@ -6,13 +6,35 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 decimal precoInicial = 0;
 decimal precoPorHora = 0;
+bool precoInicialValido = false;
+bool precoPorHoraValido = false;
 
 Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+while (!precoInicialValido) // Loop pra verificar se o que o usuário digitou pode ser convertido em um número decimal válido
+{
+    if (decimal.TryParse(Console.ReadLine(), out precoInicial)) // Se for bem sucedido, a váriavel é precoInicialValido é colocado como true e o loop é interrompido
+    {
+        precoInicialValido = true;
+    }
+    else // Caso contrário, uma mensagem é exibida pra solicitar que o usuário digite um número válido
+    {
+        Console.WriteLine("Digite um número válido para o preço inicial: ");
+    }
+}
 
 Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
+while (!precoPorHoraValido) // Funciona da mesma maneira que o loop anterior
+{
+    if (decimal.TryParse(Console.ReadLine(), out precoPorHora))
+    {
+        precoPorHoraValido = true;
+    }
+    else
+    {
+        Console.WriteLine("Digite um número válido para o preço por hora: ");
+    }
+}
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
 Estacionamento es = new Estacionamento(precoInicial, precoPorHora);

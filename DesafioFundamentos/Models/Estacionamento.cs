@@ -33,20 +33,31 @@ namespace DesafioFundamentos.Models
             // Verifica se o veículo existe
             if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
             {
-                Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
-
                 // Pede pro usuário digitar a quantidade de horas que o veículo permaneceu estacionado
-                int horas = 0;
+                Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");              
+                string horas = Console.ReadLine();
+
                 decimal valorTotal = 0;
-                horas = Convert.ToInt32(Console.ReadLine());
 
-                // Cálculo do valor total das horas que o veículo permaneceu estacionado
-                valorTotal = precoInicial + precoPorHora * horas;
+                // Loop que verifica se o que o usuário digitou é um número válido
+                bool sucesso = false;
+                while (!sucesso) // Alterado pra negação da variável sucesso
+                {
+                    if (Int32.TryParse(horas, out int horas1))
+                    {
+                        valorTotal = precoInicial + precoPorHora * horas1;
+                        veiculos.Remove(placa);
+                        Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+                        sucesso = true; // Alterado para true quando a conversão for bem sucedida
+                    }
 
-                // Remove a placa digitada da lista de veículos
-                veiculos.Remove(placa);
-
-                Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+                    else
+                    {
+                        Console.WriteLine("Digite um número válido para a quantidade de horas que o veículo permaneceu estacionado: ");
+                        sucesso = false;
+                        horas = Console.ReadLine();
+                    }
+                }
             }
             else
             {
